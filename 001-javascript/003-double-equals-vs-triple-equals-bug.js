@@ -8,16 +8,15 @@ const incomingUserId = "0";
 
 /**
  * A user just logged in.
- * The ID came from an API.
- * It is a STRING.
- * Nobody noticed.
+ * The user ID came from an API.
+ * It is a STRING, Nobody noticed.
  */
 
 if (incomingUserId == 0) {
   /**
+   * What do you think will happen in this condition?
    * This condition PASSES.
    * The app thinks this is user zero.
-   * Access is granted.
    */
   console.log("Access granted");
 }
@@ -25,32 +24,26 @@ if (incomingUserId == 0) {
 /**
  * WAIT.
  * How did a string become a number?
- * Magic?
- * No.
+ * Magic? No.
  * JavaScript did it for you.
  */
 
 /**
- * Double equals.
- * == tries to be helpful.
- * It converts types.
- * It guesses.
- * It lies.
+ * Double equals == tries to be helpful.
+ * It converts types. It guesses. It lies.
  */
 
 if (incomingUserId === 0) {
   /**
+   * Let have a look in triple equals condition senario.
    * This never runs.
-   * String is not number.
-   * No guessing.
-   * No conversion.
+   * String is not a number.
+   * No guessing and No conversion here.
    */
   console.log("Access granted");
 } else {
   /**
-   * This saves your app.
-   * This saves your users.
-   * This saves your job.
+   * This saves your app, users, and job.
    */
   console.log("Access denied");
 }
@@ -60,9 +53,6 @@ if (incomingUserId === 0) {
  * == compares after converting.
  * === compares without mercy.
  *
- * Same value?
- * Same type?
- * Or NO.
  */
 
 /**
