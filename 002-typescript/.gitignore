@@ -1,0 +1,7 @@
+node_modules
+# TypeScript build output
+dist
+*.js
+*.js.map
+*.d.ts
+*.ts.map
