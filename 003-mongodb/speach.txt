@@ -1,0 +1,37 @@
+“Your MongoDB schema is probably already wrong.”
+
+“Not because of the fields… but because of how you designed it.”
+
+“Most beginners design MongoDB like SQL.”
+
+“They ask: what tables do I need?”
+
+“But MongoDB doesn’t care about tables.”
+
+“MongoDB cares about how your app READS data.”
+
+“If one screen needs three queries… your schema already failed.”
+
+“That’s like putting your phone charger at the bottom of your backpack.”
+
+“Every time you need it, you unpack everything.”
+
+“In MongoDB, joins are expensive.”
+
+“So instead of splitting data…”
+
+“You often EMBED the data you read together.”
+
+“One query.”
+
+“Faster app.”
+
+“Happier users.”
+
+“The rule is simple.”
+
+“Design for reads, not for storage.”
+
+“Before writing your schema…”
+
+“Write your queries first.”
