@@ -13,23 +13,12 @@
 
 pub fn p01_no_null() {
     // Imagine we are looking for a user's name.
+    // In many languages, this could secretly become null.
+    // Then one innocent line of code... could suddenly crash everything. Rust refuses to play that game.
+    // Instead of null, Rust wraps the value inside Option<T>.
+    // It is either: Some(value) or  None
 
-    // In many languages,
-    // this could secretly become null.
-
-    // Then one innocent line of code...
-    // could suddenly crash everything.
-
-    // Rust refuses to play that game.
-
-    // Instead of null,
-    // Rust wraps the value inside Option<T>.
-
-    // It is either:
-    // Some(value)
-    // or
-    // None
-
+    // None and null both mean 'no value', but Rust's None lives inside Option<T>, forcing you to handle the missing case and preventing an entire class of null-pointer bugs
     let username: Option<&str> = Some("Shayon");
 
     // Because Rust knows there are only two possibilities,
@@ -50,9 +39,7 @@ pub fn p01_no_null() {
     }
 
     // Let's try another example.
-
     let favorite_language: Option<&str> = None;
-
     match favorite_language {
         Some(language) => {
             println!("Favorite language: {}", language);
@@ -70,8 +57,6 @@ pub fn p01_no_null() {
     //  *
     //  * No hidden null.
     //  * Fewer unexpected crashes.
-    //  *
-    //  * This powerful idea is called:
-    //  * Option<T>
     //  */
 }
+
