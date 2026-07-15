@@ -1,0 +1,7 @@
+@baseUrl = http://localhost:3000
+
+### Fast request - blocking
+GET http://localhost:3001/heavy
+
+### Heavy request - Non-Blocking
+GET http://localhost:3000/heavy

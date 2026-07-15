@@ -1,0 +1,39 @@
+Want your Node.js app to feel instant? Here's one event loop trick that keeps your server responsive—even during heavy calculations.
+
+This /calculate endpoint runs a massive calculation. It loops billions of times, adds every number together, and returns the final sum.
+At first glance, this code looks completely fine. But there's a hidden problem.
+While this calculation is running, Node.js can't handle any other incoming requests. 
+The event loop is blocked, so even users trying to access a simple endpoint have to wait.
+Let's see what happens when we test it."
+
+First, I'll send a request to the /calculate endpoint. Right after that, I'll send another request to the root endpoint.
+You'd expect the root endpoint to respond instantly, right? After all, it doesn't do any heavy work.
+But watch what happens... both requests are stuck waiting.
+Why? Because that massive calculation is blocking Node.js's event loop. 
+Since Node.js runs our JavaScript on a single thread, it can't process any new requests until the calculation finishes.
+This is exactly why our app suddenly feels slow—even simple requests get frozen behind one expensive task.
+
+
+Now let's fix it.
+The server looks almost identical, but there's one important difference.
+First, we made calculateSum() an async function.
+
+Instead of processing all 5 billion numbers in one giant loop, we split the work into smaller chunks.
+The outer loop moves through the entire range, while the inner loop processes just one chunk at a time.
+CHUNK_SIZE controls how much work we do before taking a short break.
+After each chunk, we use await new Promise(resolve => setImmediate(resolve)).
+setImmediate() tells Node.js, 'Pause this calculation for a moment and continue on the next event loop iteration.'
+That gives the event loop a chance to handle any pending requests before jumping back into the calculation.
+We're still doing the same amount of work—we're just not blocking the event loop for several seconds at a time.
+
+The rest of the server is exactly the same. We simply added async and await so the calculation can pause between chunks.
+
+
+Now let's run the same test again and see the difference.
+First, I'll call the /calculate endpoint... and immediately after that, the root endpoint.
+This time, the root endpoint responds almost instantly, even though the calculation is still running.
+Why? Because after each chunk of work, Node.js gets a chance to return to the event loop and process any pending requests before continuing the calculation.
+The calculation still takes the same amount of work, but your server stays responsive instead of freezing.
+
+That's the real secret. Async isn't just about using async and await. It's about writing your code in a way that lets the event loop keep doing its job.
+For long-running JavaScript tasks, breaking the work into smaller chunks can make your Node.js application feel much more responsive.
